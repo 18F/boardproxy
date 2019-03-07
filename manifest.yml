@@ -1,0 +1,5 @@
+---
+applications:
+- name: trello
+  buildpack: https://github.com/cloudfoundry/nginx-buildpack.git
+  memory: 64MB
