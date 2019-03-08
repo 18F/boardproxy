@@ -1,5 +1,8 @@
 ---
 applications:
 - name: trello
-  buildpack: https://github.com/cloudfoundry/nginx-buildpack.git
+  buildpacks: 
+    - https://github.com/pburkholder/nginx-buildpack.git
+  stack: cflinuxfs3
   memory: 64MB
+  instances: 2
