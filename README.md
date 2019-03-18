@@ -52,10 +52,5 @@ Viewing other boards. Boards are all `b/boardcode/board-readable-name`.
 ## Testing
 
 ```sh
-docker pull nginx
-docker run --name board-test -p 8080:80 \
-    -v $(pwd)/test/nginx.conf:/etc/nginx/nginx.conf:ro -d nginx
-docker run -it -v "$(pwd):/code" bats/bats:latest /code/test
-docker rm -f board-test
+./runtest.sh
 ```
-
