@@ -1,3 +1,4 @@
 #!/bin/sh
-
-bats -r ./test/
+bats ./test/filter.bats
+#bats ./test/ok.bats
+#bats -r ./test/

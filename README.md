@@ -51,6 +51,8 @@ Viewing other boards. Boards are all `b/boardcode/board-readable-name`.
 
 ## Testing
 
+Testing requires local install of `bats` and `httpie`. Run with:
+
 ```sh
 ./runtest.sh
 ```
