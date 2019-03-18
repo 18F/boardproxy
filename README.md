@@ -49,3 +49,13 @@ The one with the user _name_ provides a UI, e.g: https://trello.com/peteragencyb
 
 Viewing other boards. Boards are all `b/boardcode/board-readable-name`. 
 
+## Testing
+
+```sh
+docker pull nginx
+docker run --name board-test -p 8080:80 \
+    -v $(pwd)/nginx-test.conf:/etc/nginx/nginx.conf:ro -d nginx
+curl http://localhost:8080/asldfj
+docker rm -f board-test
+```
+
