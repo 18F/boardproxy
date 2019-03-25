@@ -1,15 +1,5 @@
 #!/usr/bin/env bats
 
-setup() {
-    docker run --name board-ok -p 8080:80 \
-        -v $(pwd)/test/ok.html:/usr/share/nginx/html/ok.html \
-        -v $(pwd)/fixtures/ok_test.conf:/etc/nginx/nginx.conf:ro -d nginx
-}
-
-teardown() {
-    docker rm -f board-ok
-}
-
 http="http -h --pretty=none"
 
 @test "Responds OK to GET /boards" {

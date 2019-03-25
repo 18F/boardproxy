@@ -1,16 +1,5 @@
 #!/usr/bin/env bats
 
-setup() {
-    docker run --name board-filter -p 8080:80 \
-        -v $(pwd)/test/ok.html:/usr/share/nginx/html/ok.html \
-        -v $(pwd)/fixtures/filter_test.conf:/etc/nginx/nginx.conf:ro \
-        -v $(pwd)/conf.d:/etc/nginx/conf.d -d nginx
-}
-
-teardown() {
-    docker rm -f board-filter
-}
-
 http="http -h --pretty=none"
 
 @test "Responds OK to GET /boards" {
