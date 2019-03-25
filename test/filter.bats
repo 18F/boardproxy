@@ -12,6 +12,11 @@ http="http -h --pretty=none"
     [[ ${lines[0]} =~ "HTTP/1.1 200 OK" ]]
 }
 
+@test "Responds 200 OK to board fetch" {
+    run $http GET :8080/1/boards
+    [[ ${lines[0]} =~ "HTTP/1.1 200 OK" ]]
+}
+
 @test "Responds 403 forbidden to board creation" {
     run $http POST :8080/1/boards body="board creation"
     [[ ${lines[0]} =~ "HTTP/1.1 403 Forbidden" ]]

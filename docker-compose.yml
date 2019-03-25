@@ -14,7 +14,7 @@ services:
       - 8080:80
     command: >
       /bin/sh -c 
-      "sed -e 's/{{port}}/80/' -e 's|https://trello.com/|http://trello_com|' < \
+      "sed -e 's/{{port}}/80/g' -e 's|https://trello.com/|http://trello_com|g' < \
         /tmp/nginx.tmpl > \
         /etc/nginx/nginx.conf && \
         exec nginx;"
