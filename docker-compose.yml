@@ -5,5 +5,22 @@ services:
     volumes:
       - ./fixtures/ok.html:/usr/share/nginx/html/ok.html 
       - ./fixtures:/etc/nginx
+
+  trello_proxy:
+    image: nginx:mainline-alpine
+    volumes:
+      - ./nginx.conf:/tmp/nginx.tmpl
     ports:
       - 8080:80
+    command: >
+      /bin/sh -c 
+      "sed -e 's/{{port}}/80/' < /tmp/nginx.tmpl > /etc/nginx/nginx.conf && exec nginx;"
+
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.32.0.0/16
+    
+
