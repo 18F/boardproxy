@@ -15,7 +15,7 @@ teardown() {
     docker rm -f board-filter
 }
 
-setup
+#setup
 bats -r ./test/
-teardown
+#teardown
 

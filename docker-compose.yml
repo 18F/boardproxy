@@ -1,0 +1,9 @@
+version: '3.0'
+services:
+  trello_backend:
+    image: nginx:mainline-alpine
+    volumes:
+      - ./fixtures/ok.html:/usr/share/nginx/html/ok.html 
+      - ./fixtures:/etc/nginx
+    ports:
+      - 8080:80
