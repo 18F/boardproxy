@@ -14,7 +14,10 @@ services:
       - 8080:80
     command: >
       /bin/sh -c 
-      "sed -e 's/{{port}}/80/' < /tmp/nginx.tmpl > /etc/nginx/nginx.conf && exec nginx;"
+      "sed -e 's/{{port}}/80/' < \
+        /tmp/nginx.tmpl > \
+        /etc/nginx/nginx.conf && \
+        exec nginx;"
 
 networks:
   default:
