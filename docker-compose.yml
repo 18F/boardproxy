@@ -1,6 +1,6 @@
 version: '3.0'
 services:
-  trello_backend:
+  trello_com:
     image: nginx:mainline-alpine
     volumes:
       - ./fixtures/ok.html:/usr/share/nginx/html/ok.html 
@@ -14,7 +14,7 @@ services:
       - 8080:80
     command: >
       /bin/sh -c 
-      "sed -e 's/{{port}}/80/' < \
+      "sed -e 's/{{port}}/80/' -e 's|https://trello.com/|http://trello_com|' < \
         /tmp/nginx.tmpl > \
         /etc/nginx/nginx.conf && \
         exec nginx;"
