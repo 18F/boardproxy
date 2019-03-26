@@ -2,41 +2,45 @@
 
 http="http -h --pretty=none"
 
+200_test() {
+    run $http $request
+    [[ ${lines[0]} =~ "HTTP/1.1 200 OK" ]]
+    run $http $request -b
+    [[ ${lines[0]} =~ "BOARD" ]]
+}
+
 @test "Responds OK to GET /boards" {
-    run $http GET :8080/boards
-    [[ ${lines[0]} =~ "HTTP/1.1 200 OK" ]]
+    request="GET :8080/boards"
+    200_test
 }
 
-@test "Responds OK to board update" {
-    run $http POST :8080/1/boards/5c8acc11bc371f1558970c98/markAsViewed
-    [[ ${lines[0]} =~ "HTTP/1.1 200 OK" ]]
+@test "Responds OK to POST board update" {
+    request="POST :8080/1/boards/5c8acc11bc371f1558970c98/markAsViewed"
+    200_test
 }
 
-@test "Responds 200 OK to board fetch" {
-    run $http GET :8080/1/boards
-    [[ ${lines[0]} =~ "HTTP/1.1 200 OK" ]]
+@test "Responds 200 OK tol GET /1/boards" {
+    request="GET :8080/1/boards"
+    200_test
 }
 
-@test "Responds 403 forbidden to board creation" {
+@test "Responds 403 forbidden to POST board creation" {
     run $http POST :8080/1/boards body="board creation"
     [[ ${lines[0]} =~ "HTTP/1.1 403 Forbidden" ]]
 }
 
-@test "Responds OK to team creation" {
-    skip
+@test "Responds 403 forbidden to POST team creation" {
     run $http POST :8080/1/organizations body="team creation"
-    [[ ${lines[0]} =~ "HTTP/1.1 200 OK" ]]
+    [[ ${lines[0]} =~ "HTTP/1.1 403 Forbidden" ]]
 }
 
-@test "Responds OK to listing power-ups" {
-    skip
+@test "Responds 403 forbidden to GET power-ups" {
     run $http GET :8080/b/5555/some-name/power-ups
-    [[ ${lines[0]} =~ "HTTP/1.1 200 OK" ]]
+    [[ ${lines[0]} =~ "HTTP/1.1 403 Forbidden" ]]
 }
 
-@test "Responds OK to POST new power-ups" {
-    skip
+@test "Responds 403 forbidden POST new power-ups" {
     run $http POST :8080/1/boards/5c8ac57b/boardPlugins
-    [[ ${lines[0]} =~ "HTTP/1.1 200 OK" ]]
+    [[ ${lines[0]} =~ "HTTP/1.1 403 Forbidden" ]]
 }
 
