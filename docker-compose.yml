@@ -10,13 +10,15 @@ services:
     image: nginx:mainline-alpine
     volumes:
       - ./nginx.conf:/tmp/nginx.tmpl
+      - ./proxy.conf:/tmp/proxy.tmpl
     ports:
       - 8080:80
     command: >
-      /bin/sh -c 
-      "sed -e 's/{{port}}/80/g' -e 's|https://trello.com/|http://trello_com|g' < \
-        /tmp/nginx.tmpl > \
-        /etc/nginx/nginx.conf && \
+      /bin/sh -eux -c 
+        "sed -e 's/{{port}}/80/g'< \
+          /tmp/nginx.tmpl > /etc/nginx/nginx.conf && \
+        sed -e 's|https://trello.com/|http://trello_com|g' < \
+          /tmp/proxy.tmpl > /etc/nginx/proxy.conf && \
         exec nginx;"
 
 networks:
