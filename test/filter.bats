@@ -19,7 +19,7 @@ http="http -h --pretty=none"
     200_test
 }
 
-@test "Responds 200 OK tol GET /1/boards" {
+@test "Responds 200 OK to GET /1/boards" {
     request="GET :8080/1/boards"
     200_test
 }
@@ -35,7 +35,7 @@ http="http -h --pretty=none"
 }
 
 @test "Responds 403 forbidden to GET power-ups" {
-    run $http GET :8080/b/5555/some-name/power-ups
+    run $http GET :8080/b/a2c4d6g8/some-name/power-ups
     [[ ${lines[0]} =~ "HTTP/1.1 403 Forbidden" ]]
 }
 
