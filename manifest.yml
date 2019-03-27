@@ -1,8 +1,13 @@
 ---
 applications:
-- name: trello
+- name: ((name))
   buildpacks: 
-    - https://github.com/pburkholder/nginx-buildpack.git
+    - https://github.com/cloudfoundry/nginx-buildpack.git#develop
   stack: cflinuxfs3
   memory: 64MB
-  instances: 2
+  instances: ((instances))
+  env:
+    SCHEMA: https://
+    BACKEND: trello.com
+    PROXY: ((name)).app.cloud.gov
+

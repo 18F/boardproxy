@@ -1,0 +1,31 @@
+version: '3.0'
+services:
+  trello_com:
+    image: nginx:1.15.10
+    volumes:
+      - ./fixtures/ok.html:/usr/share/nginx/html/ok.html 
+      - ./fixtures:/etc/nginx
+
+  trello_proxy:
+    image: nginx:1.15.10
+    volumes:
+      - ./nginx.conf:/tmp/nginx.tmpl
+    ports:
+      - 8080:80
+    command: >
+      /bin/sh -eux -c 
+        "sed -e 's/{{port}}/80/g' \
+          -e 's|{{env .SCHEMA.}}|http://|g;' \
+          -e 's|{{env .BACKEND.}}|trello_com|g;' \
+          -e 's|{{env .PROXY.}}|localhost|g' < \
+          /tmp/nginx.tmpl > /etc/nginx/nginx.conf && \
+        exec nginx;"
+
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.32.0.0/16
+    
+
