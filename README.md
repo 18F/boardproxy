@@ -1,4 +1,4 @@
-# femaboard proxy
+# BoardProxy
 
 Proxies traffic to https://trello.com via https://trello.app.cloud.gov
 
@@ -6,13 +6,23 @@ Proxies traffic to https://trello.com via https://trello.app.cloud.gov
 
 To deploy the app:
 
-    $ cf push manifest.yml
+```sh
+cf push --vars-file prod_var.yml
+```
 
 Navigate to: https://trello.app.cloud.gov/b/fATOinWT/fema-ocio-ei-no-pii-or-cui
 
 ## Authentication
 
 None. Filters based on ingress IP address.
+
+## Testing
+
+Testing requires a `bash` shell and local install of `docker-compose`, `bats` and `httpie`. Run with:
+
+```sh
+./runtest.sh
+```
 
 ## Recommended settings
 
@@ -48,11 +58,3 @@ https://trello.com/1/members/peter.burkholder@agency.gov
 The one with the user _name_ provides a UI, e.g: https://trello.com/peteragencyburkholder
 
 Viewing other boards. Boards are all `b/boardcode/board-readable-name`. 
-
-## Testing
-
-Testing requires local install of `bats` and `httpie`. Run with:
-
-```sh
-./runtest.sh
-```
