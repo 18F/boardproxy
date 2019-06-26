@@ -18,7 +18,7 @@ None. Filters based on ingress IP address.
 
 ## Testing
 
-Testing requires a `bash` shell and local install of `docker-compose`, `bats` and `httpie`. Run with:
+Testing requires a `bash` shell and local install of `docker-compose`, `bats` (preferably `bats-core` on MacOS) and `httpie`. Run with:
 
 ```sh
 ./runtest.sh
