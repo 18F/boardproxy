@@ -44,3 +44,21 @@ http="http -h --pretty=none"
     [[ ${lines[0]} =~ "HTTP/1.1 403 Forbidden" ]]
 }
 
+@test "OK to visit peterb-18f board - experimental" {
+    request="GET :8080/b/xlSL7tfN/"
+    200_test
+}
+
+@test "OK to visit peterb money board - experimental" {
+    request="GET :8080/b/kREErFrk/money-money-money"
+    200_test
+    request="GET :8080/1/Boards/kREErFrk?param=b&another=c"
+    200_test
+}
+
+@test "Responds 403 forbidden my prof dev board - experimental" {
+    run $http GET :8080/b/xVKxn1Gb/professional-development-not-18f
+    [[ ${lines[0]} =~ "HTTP/1.1 403 Forbidden" ]]
+    run $http GET :8080/1/Boards/xVKxn1Gb?parama=b&paramb=c
+    [[ ${lines[0]} =~ "HTTP/1.1 403 Forbidden" ]]
+}
